@@ -1,0 +1,24 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual C# Express 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "spaceInvader", "spaceInvader\spaceInvader\spaceInvader.csproj", "{B801E673-824A-4AC5-9A22-09316CA19BEB}"
+EndProject
+Project("{96E2B04D-8817-42C6-938A-82C39BA4D311}") = "spaceInvaderContent", "spaceInvader\spaceInvaderContent\spaceInvaderContent.contentproj", "{C665615B-2D94-4B54-8E80-47A763B43505}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B801E673-824A-4AC5-9A22-09316CA19BEB}.Debug|x86.ActiveCfg = Debug|x86
+		{B801E673-824A-4AC5-9A22-09316CA19BEB}.Debug|x86.Build.0 = Debug|x86
+		{B801E673-824A-4AC5-9A22-09316CA19BEB}.Release|x86.ActiveCfg = Release|x86
+		{B801E673-824A-4AC5-9A22-09316CA19BEB}.Release|x86.Build.0 = Release|x86
+		{C665615B-2D94-4B54-8E80-47A763B43505}.Debug|x86.ActiveCfg = Debug|x86
+		{C665615B-2D94-4B54-8E80-47A763B43505}.Release|x86.ActiveCfg = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

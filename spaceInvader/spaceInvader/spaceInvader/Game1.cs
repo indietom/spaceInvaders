@@ -27,10 +27,17 @@ namespace spaceInvader
 
         Player player = new Player();
         List<bullet> bullets = new List<bullet>();
+        List<enemy> enemies = new List<enemy>();
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-
+            for (int x = 0; x < 10; x++)
+            {
+                for (int y = 0; y < 5; y++)
+                {
+                    enemies.Add(new enemy(x * 32, y * 32));
+                }
+            }
             base.Initialize();
         }
 
@@ -67,6 +74,28 @@ namespace spaceInvader
             // TODO: Add your update logic here
             player.input(bullets);
             base.Update(gameTime);
+            foreach (enemy e in enemies)
+            {
+                e.movment(enemies.Count);
+                if (e.x > 800)
+                {
+                    foreach (enemy e2 in enemies)
+                    {
+                        e2.y += 32;
+                        e2.x -= 42;
+                        e2.direction = 2;
+                    }
+                }
+                if (e.x < 0)
+                {
+                    foreach (enemy e2 in enemies)
+                    {
+                        e2.y += 32;
+                        e2.x += 42;
+                        e2.direction = 1;
+                    }
+                }
+            }
             foreach (bullet b in bullets)
             {
                 b.movement();
@@ -79,11 +108,12 @@ namespace spaceInvader
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.Black);
 
             spriteBatch.Begin();
             player.drawSprite(spriteBatch, spritesheet);
             foreach (bullet b in bullets) { b.drawSprite(spriteBatch, spritesheet); }
+            foreach (enemy e in enemies) { e.drawSprite(spriteBatch, spritesheet); }
             spriteBatch.End();
 
             base.Draw(gameTime);

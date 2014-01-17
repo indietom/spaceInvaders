@@ -25,12 +25,8 @@ namespace spaceInvader
             Content.RootDirectory = "Content";
         }
 
-        /// <summary>
-        /// Allows the game to perform any initialization it needs to before starting to run.
-        /// This is where it can query for any required services and load any non-graphic
-        /// related content.  Calling base.Initialize will enumerate through any components
-        /// and initialize them as well.
-        /// </summary>
+        Player player = new Player();
+        List<bullet> bullets = new List<bullet>();
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
@@ -64,6 +60,7 @@ namespace spaceInvader
         /// checking for collisions, gathering input, and playing audio.
         /// </summary>
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
+        
         protected override void Update(GameTime gameTime)
         {
             // Allows the game to exit
@@ -71,8 +68,12 @@ namespace spaceInvader
                 this.Exit();
 
             // TODO: Add your update logic here
-
+            player.input(bullets);
             base.Update(gameTime);
+            foreach (bullet b in bullets)
+            {
+                b.movement();
+            }
         }
 
         /// <summary>

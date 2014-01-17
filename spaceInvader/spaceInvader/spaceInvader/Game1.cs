@@ -126,10 +126,6 @@ namespace spaceInvader
             {
                 b.movement();
             }
-            foreach (ufo u in ufos)
-            {
-                u.movement();
-            }
             for (int i = 0; i < bullets.Count; i++)
             {
                 if (bullets[i].destroy)
@@ -162,6 +158,7 @@ namespace spaceInvader
                     {
                         b.destroy = true;
                         u.destroy = true;
+                        u.movement();
                     }
                 }
             }   

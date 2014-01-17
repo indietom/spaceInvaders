@@ -16,7 +16,7 @@ namespace spaceInvader
 
         public void movement()
         {
-            y = -11;
+            y -= 11;
         }
     }
 }

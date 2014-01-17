@@ -15,10 +15,11 @@ namespace spaceInvader
     class Player : objects
     {
         public int guntype;
+        public bool keyFalse;
 
         public Player()
         {
-            setCoords(1,1);
+            setCoords(400, 400);
             setSize(32, 32);
             setSpriteCoords(1, 1);
             hp = 3;
@@ -31,11 +32,11 @@ namespace spaceInvader
             KeyboardState keyboard = Keyboard.GetState();
             if (keyboard.IsKeyDown(Keys.Left))
             {
-                x = -5;
+                x -= 5;
             }
             if (keyboard.IsKeyDown(Keys.Right))
             {
-                x = +5;
+                x += 5;
             }
             if (keyboard.IsKeyDown(Keys.X) && guntype == 1)
             {

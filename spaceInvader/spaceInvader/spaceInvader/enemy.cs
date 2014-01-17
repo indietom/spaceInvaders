@@ -9,6 +9,7 @@ namespace spaceInvader
     {
         public int speed;
         public int countToStep;
+        public int direction;
         public enemy(int x2, int y2)
         {
 
@@ -20,7 +21,14 @@ namespace spaceInvader
             {
                 if (countToStep >= 32)
                 {
-
+                    if (direction == 1)
+                    {
+                        x += 3;
+                    }
+                    else
+                    {
+                        x -= 3;
+                    }
                 }
             }
         }

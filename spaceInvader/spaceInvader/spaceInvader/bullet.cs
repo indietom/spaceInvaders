@@ -12,6 +12,7 @@ namespace spaceInvader
             setCoords(x2, y2);
             setSize(6,6);
             setSpriteCoords(1, 27);
+            destroy = false;
         }
 
         public void movement()

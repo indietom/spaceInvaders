@@ -22,6 +22,8 @@ namespace spaceInvader
         public int height;
         public int hp;
 
+        public bool destroy;
+
         public void setCoords(int x2, int y2)
         {
             x = x2;

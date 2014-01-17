@@ -40,7 +40,7 @@ namespace spaceInvader
             }
             if (keyboard.IsKeyDown(Keys.X) && guntype == 1 && !keyFalse)
             {
-                bullets.Add(new bullet(x + 16, y + 16));
+                bullets.Add(new bullet(x + 13, y + 13));
                 keyFalse = true;
             }
             if (keyFalse)

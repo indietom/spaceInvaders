@@ -30,12 +30,11 @@ namespace spaceInvader
         List<enemy> enemies = new List<enemy>();
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
             for (int x = 0; x < 10; x++)
             {
                 for (int y = 0; y < 5; y++)
                 {
-                    enemies.Add(new enemy(x * 32, y * 32));
+                    enemies.Add(new enemy(x * 50, y * 40 + 32));
                 }
             }
             base.Initialize();
@@ -59,12 +58,21 @@ namespace spaceInvader
             // TODO: Unload any non ContentManager content here
         }
 
-        /// <summary>
-        /// Allows the game to run logic such as updating the world,
-        /// checking for collisions, gathering input, and playing audio.
-        /// </summary>
-        /// <param name="gameTime">Provides a snapshot of timing values.</param>
-        
+        public bool collision(ref Rectangle object1, ref Rectangle object2)
+        {
+            if (object1.Y >= object2.Y + object2.Height)
+                return false;
+            if (object1.X >= object2.X + object2.Width)
+                return false;
+            if (object1.Y + object1.Height <= object2.Y)
+                return false;
+            if (object1.X + object1.Width <= object2.X)
+                return false;
+            return true;
+        }
+
+        int amountOfAliens = 50;
+
         protected override void Update(GameTime gameTime)
         {
             // Allows the game to exit
@@ -72,11 +80,13 @@ namespace spaceInvader
                 this.Exit();
 
             // TODO: Add your update logic here
+            Rectangle bulletC;
+            Rectangle enemyC;
             player.input(bullets);
             base.Update(gameTime);
             foreach (enemy e in enemies)
             {
-                e.movment(enemies.Count);
+                e.movment(amountOfAliens);
                 if (e.x > 800)
                 {
                     foreach (enemy e2 in enemies)
@@ -95,17 +105,38 @@ namespace spaceInvader
                         e2.direction = 1;
                     }
                 }
+                enemyC = new Rectangle(e.x, e.y, 32, 32);
+                foreach (bullet b in bullets)
+                {
+                    bulletC = new Rectangle(b.x, b.y, 6, 6);
+                    if (collision(ref bulletC, ref enemyC))
+                    {
+                        b.destroy = true;
+                        e.destroy = true;
+                        amountOfAliens -= 1;
+                    }
+                }
             }
             foreach (bullet b in bullets)
             {
                 b.movement();
             }
+            for (int i = 0; i < bullets.Count; i++)
+            {
+                if (bullets[i].destroy)
+                {
+                    bullets.RemoveAt(i);
+                }
+            }
+            for (int i = 0; i < enemies.Count; i++)
+            {
+                if (enemies[i].destroy)
+                {
+                    enemies.RemoveAt(i);
+                }
+            }
         }
 
-        /// <summary>
-        /// This is called when the game should draw itself.
-        /// </summary>
-        /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.Black);

@@ -24,7 +24,7 @@ namespace spaceInvader
             setSpriteCoords(1, 1);
             hp = 3;
             guntype = 1;
-
+            keyFalse = false;
         }
 
         public void input(List<bullet> bullets)
@@ -38,9 +38,10 @@ namespace spaceInvader
             {
                 x += 5;
             }
-            if (keyboard.IsKeyDown(Keys.X) && guntype == 1)
+            if (keyboard.IsKeyDown(Keys.X) && guntype == 1 && !keyFalse)
             {
                 bullets.Add(new bullet(x + 16, y + 16));
+                keyFalse = true;
             }
         }
     }

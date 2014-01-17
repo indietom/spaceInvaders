@@ -28,6 +28,7 @@ namespace spaceInvader
         Player player = new Player();
         List<bullet> bullets = new List<bullet>();
         List<enemy> enemies = new List<enemy>();
+        List<ufo> ufos = new List<ufo>();
         protected override void Initialize()
         {
             for (int x = 0; x < 10; x++)
@@ -38,6 +39,7 @@ namespace spaceInvader
                 }
             }
             base.Initialize();
+
         }
 
         Texture2D spritesheet;
@@ -73,6 +75,8 @@ namespace spaceInvader
 
         int amountOfAliens = 50;
 
+        public int ufoTimer = 0;
+
         protected override void Update(GameTime gameTime)
         {
             // Allows the game to exit
@@ -82,6 +86,7 @@ namespace spaceInvader
             // TODO: Add your update logic here
             Rectangle bulletC;
             Rectangle enemyC;
+            Rectangle ufoC;
             player.input(bullets);
             base.Update(gameTime);
             foreach (enemy e in enemies)
@@ -135,6 +140,35 @@ namespace spaceInvader
                     enemies.RemoveAt(i);
                 }
             }
+            for (int i = 0; i < ufos.Count; i++)
+            {
+                if (ufos[i].destroy)
+                {
+                    ufos.RemoveAt(i);
+                }
+            }
+
+            foreach (ufo u in ufos)
+            {
+                ufoC = new Rectangle(u.x, u.y, 32, 32);
+                foreach (bullet b in bullets)
+                {
+                    bulletC = new Rectangle(b.x, b.y, 6, 6);
+                    if (collision(ref bulletC, ref ufoC))
+                    {
+                        b.destroy = true;
+                        u.destroy = true;
+                        u.movement();
+                    }
+                }
+            }   
+
+            ufoTimer += 1;
+            if (ufoTimer == 96)
+            {
+                ufos.Add(new ufo());
+                ufoTimer = 0;
+            }
         }
 
         protected override void Draw(GameTime gameTime)
@@ -145,6 +179,7 @@ namespace spaceInvader
             player.drawSprite(spriteBatch, spritesheet);
             foreach (bullet b in bullets) { b.drawSprite(spriteBatch, spritesheet); }
             foreach (enemy e in enemies) { e.drawSprite(spriteBatch, spritesheet); }
+            foreach (ufo u in ufos) { u.drawSprite(spriteBatch, spritesheet); }
             spriteBatch.End();
 
             base.Draw(gameTime);

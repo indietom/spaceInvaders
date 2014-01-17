@@ -43,6 +43,13 @@ namespace spaceInvader
                 bullets.Add(new bullet(x + 16, y + 16));
                 keyFalse = true;
             }
+            if (keyFalse)
+            {
+                if (keyboard.IsKeyUp(Keys.X))
+                {
+                    keyFalse = false;
+                }
+            }
         }
     }
 }
